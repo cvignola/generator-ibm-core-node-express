@@ -1,0 +1,35 @@
+#!/bin/bash -ex
+
+# Clones express-basic and compares it to the generator output
+# Make sure you've run `npm link` in the generator folder first
+
+WORKSPACE=$HOME/tmp
+
+mkdir -p "$WORKSPACE"
+
+cd "$WORKSPACE"
+
+[ ! -d express-basic ] && git clone git@github.ibm.com:Bethany-Griggs/express-basic.git
+
+cd "$WORKSPACE"/express-basic
+
+git checkout develop
+git fetch --all
+git reset --hard origin/develop
+git clean -fdx
+
+cd "$WORKSPACE"
+
+[ -d express-basic-generated ] && rm -r "$WORKSPACE"/express-basic-generated
+mkdir express-basic-generated
+
+cd express-basic-generated
+yo express:refresh
+rm -r node_modules
+
+cd "$WORKSPACE"
+
+exists() { type "$1" >/dev/null 2>&1; } # Check if command exists (is in path)
+
+exists meld || brew cask install meld
+meld express-basic express-basic-generated
