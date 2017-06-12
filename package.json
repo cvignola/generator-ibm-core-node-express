@@ -1,16 +1,15 @@
 {
-  "name": "@arf/generator-express",
-  "version": "1.0.2",
-  "description": "Node.js Yeoman generator",
-  "homepage": "https://github.ibm.com/arf/node-codegen-yeoman",
-  "author": {
-    "name": "Beth Griggs",
-    "email": "Bethany.Griggs@uk.ibm.com",
-    "url": "https://github.ibm.com/Bethany-Griggs"
-  },
-  "main": "generators/index.js",
+  "name": "@arf/generator-core-node-express",
+  "version": "0.0.2",
+  "description": "Yeoman generator for core node-express application",
+  "homepage": "https://github.ibm.com/arf/generator-core-node-express",
+  "author": {},
   "keywords": [
     "yeoman-generator"
+  ],
+  "files": [
+    "app",
+    "refresh"
   ],
   "dependencies": {
     "chalk": "^1.1.3",

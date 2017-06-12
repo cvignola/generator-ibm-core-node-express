@@ -1,5 +1,5 @@
 {
-  "name": "<%= bluemix.name || spec.appname %>",
+  "name": "<%= bluemix.server.name || spec.appname %>",
   "version": "1.0.0",
   "description": "A generated Bluemix application",
   "private": true,

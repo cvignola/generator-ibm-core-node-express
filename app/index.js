@@ -33,38 +33,8 @@ module.exports = class extends Generator {
   initializing() {
     this.skipPrompt = true;
 
-    if (this.options.spec) {
-      // If "spec" was sent by scaffolder - parse it
-      console.log("Parsing 'spec' received from Scaffolder");
-      try {
-        this.options.spec = typeof(this.options.spec) === 'string' ?
-          JSON.parse(this.options.spec) : this.options.spec;
-      } catch (err) {
-        console.error(chalk.red(err));
-      }
-    } else {
-      // If "spec" was NOT sent by scaffolder, but --specfile parameter was used
-      // get the spec from default_spec.js file. This is useful for development
-      // in order not to answer bunch of questions every time
-      console.log("Reading default_spec.js");
-      this.options.spec = JSON.parse(require("./default_spec.js"));
-    }
-
-    if (this.options.bluemix) {
-      // If "bluemix" was sent by scaffolder - parse it
-      console.log("Parsing 'bluemix' received from Scaffolder");
-      try {
-        this.options.bluemix = typeof(this.options.bluemix) === 'string' ?
-          JSON.parse(this.options.bluemix) : this.options.bluemix;
-      } catch (err) {
-        console.error(chalk.red(err));
-      }
-    } else {
-      // If "bluemix" was NOT sent by scaffolder - fallback to default_bluemix.js
-      // This is useful for development to test the integration with Scaffolder
-      console.log("Reading default_bluemix.json");
-      this.options.bluemix = JSON.parse(require("./default_bluemix.js"));
-    }
+	  this._sanitizeOption(this.options, OPTION_BLUEMIX);
+	  this._sanitizeOption(this.options, OPTION_SPEC);
 
     if (this.options.bluemix) {
       const projectConfig = this.options.bluemix;
@@ -74,10 +44,35 @@ module.exports = class extends Generator {
       projectConfig.hasServer = typeof(projectConfig.server) === "object";
       this.options.bluemix = projectConfig;
     }
-
   }
 
-  prompting() {
+  _sanitizeOption(options, name) {
+    var optionValue = options[name];
+      if (!optionValue) {
+       this.log("Did not receive", name, "parameter from Scaffolder. Falling back to fallback_" + name + ".js");
+			this.options[name] = JSON.parse(require("./fallback_" + name));
+			return;
+		}
+
+		if (optionValue.indexOf("file:") === 0){
+			var fileName = optionValue.replace("file:","");
+			var filePath = this.destinationPath("./" + fileName);
+			console.log("Reading", name, "parameter from local file", filePath);
+			this.options[name] = this.fs.readJSON(filePath);
+			return;
+		}
+
+		try {
+			this.options[name] = typeof(this.options[name]) === "string" ?
+				JSON.parse(this.options[name]) : this.options[name];
+		} catch (err) {
+			console.error(chalk.red(err));
+			throw name + " parameter is expected to be a valid stringified JSON object";
+		}
+	}
+
+
+	prompting() {
     if (this.skipPrompt) return;
 
     return this.prompt([{
@@ -167,8 +162,9 @@ module.exports = class extends Generator {
       }
     });
   }
+
   install() {
-    this.composeWith(require.resolve('../refresh/index.js'), {
+    this.composeWith(require.resolve('../refresh'), {
       spec: this.options.spec,
       bluemix: this.options.bluemix
     });
