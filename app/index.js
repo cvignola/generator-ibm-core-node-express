@@ -30,20 +30,46 @@ module.exports = class extends Generator {
     console.log("Package info ::", thisPackage.name, thisPackage.version)
   }
 
+
+
   initializing() {
     this.skipPrompt = true;
 
-	  this._sanitizeOption(this.options, OPTION_BLUEMIX);
-	  this._sanitizeOption(this.options, OPTION_SPEC);
+    this._sanitizeOption(this.options, OPTION_BLUEMIX);
+    this._sanitizeOption(this.options, OPTION_SPEC);
+  }
 
-    if (this.options.bluemix) {
-      const projectConfig = this.options.bluemix;
-      projectConfig.hasCloudant = typeof(projectConfig.cloudant) === "object";
-      projectConfig.hasObjectStorage = typeof(projectConfig.objectStorage) === "object";
-      projectConfig.hasAppId = typeof(projectConfig.appid) === "object";
-      projectConfig.hasServer = typeof(projectConfig.server) === "object";
-      this.options.bluemix = projectConfig;
+  /**
+   * Copy a template file or directory to a location with options
+   *
+   * @param {string} from Template file
+   * @param {string=} to Destination file, defaults to same as from
+   * @param {any=} options Copy options
+   * @param {boolean=} options Whether the input is a file or directory
+   */
+  _copy(from, to, options = {}, directory = false) {
+    if (typeof to === 'undefined') {
+      to = from;
     }
+
+    if (directory === true) {
+      this.fs.copy(this.templatePath(from), this.destinationPath(to), options);
+    } else {
+      this.fs.copyTpl(this.templatePath(from), this.destinationPath(to), options);
+    }
+  }
+
+  writing() {
+    const options = this.options;
+
+    this._copy('public', 'public', {}, true);
+    this._copy('test', 'test', {}, true);
+    this._copy('server/config', 'server/config', {}, true);
+    this._copy('server/routers', 'server/routers', {}, true);
+    this._copy('server/services', 'server/services', {}, true);
+    this._copy('server/server.js', 'server/server.js', options);
+    this._copy('package.json', 'package.json', options);
+    this._copy('README.md', 'README.md', options);
   }
 
   _sanitizeOption(options, name) {
@@ -160,13 +186,6 @@ module.exports = class extends Generator {
       if (answers.dbName) {
         answers.dbName.forEach(name => this.options.spec[name] = {})
       }
-    });
-  }
-
-  install() {
-    this.composeWith(require.resolve('../refresh'), {
-      spec: this.options.spec,
-      bluemix: this.options.bluemix
     });
   }
 };

@@ -6,8 +6,8 @@ const localConfig = require('./config/local.json');
 
 const logger = log4js.getLogger(appName);
 const app = express();
-require('./services')(app);
-require('./routers')(app);
+require('./services/index')(app);
+require('./routers/index')(app);
 
 // Add your code here
 
