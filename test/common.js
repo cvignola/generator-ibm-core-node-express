@@ -6,36 +6,20 @@ const fs = require('fs');
 
 // Paths to the generated files, if you move files around change paths here.
 exports.file = {
-  cfignore: '.cfignore',
-  Dockerfile: 'Dockerfile',
-  Dockerfile_tools: 'Dockerfile-tools',
   gitignore: '.gitignore',
-  manifest_yml: 'manifest.yml',
   package_json: 'package.json',
-  pipeline_yml: '.bluemix/pipeline.yml',
   README_md: 'README.md',
-  server_js: 'server.js',
-  vcap_local_js: 'vcap-local.js'
+  server_js: 'server/server.js',
+  index_html: 'public/index.html',
+  local: 'server/config/local.json',
+  health: 'server/routers/health.js',
+  index_router: 'server/routers/index.js',
+  public: 'server/routers/public.js',
+  index_service: 'server/services/index.js'
 };
-
-// Paths to the partial files, if you change them or add more change these vars
-exports.partial = {
-  appid_api: 'refresh/templates/partials/appid-api-strategy.ejs',
-  cloudant: 'refresh/templates/partials/cloudant.ejs',
-  objectStorage: 'refresh/templates/partials/objectStorage.ejs',
-  appid_webapp: 'refresh/templates/partials/appid-webapp-strategy.ejs',
-  mongo: 'refresh/templates/partials/mongo.ejs',
-  redis: 'refresh/templates/partials/redis.ejs',
-  monitoring: 'refresh/templates/partials/monitoring.ejs',
-};
-
-// Read a partial
-exports.readPartial = function(rootPath, partialPath) {
-  return fs.readFileSync(rootPath + partialPath, 'utf8');
-}
 
 // Default port defined in app/index.js.
-exports.defaultPort = 8080;
+exports.defaultPort = 3456;
 
 // The npm start command.
-exports.npmStart = "node server.js"
+exports.npmStart = "node server.js";

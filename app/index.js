@@ -48,7 +48,7 @@ module.exports = class extends Generator {
    * @param {boolean=} options Whether the input is a file or directory
    */
   _copy(from, to, options = {}, directory = false) {
-    if (typeof to === 'undefined') {
+    if (!to) {
       to = from;
     }
 
@@ -62,29 +62,22 @@ module.exports = class extends Generator {
   writing() {
     const options = this.options;
 
-    this._copy('public', 'public', {}, true);
-    this._copy('test', 'test', {}, true);
-    this._copy('server/config', 'server/config', {}, true);
-    this._copy('server/routers', 'server/routers', {}, true);
-    this._copy('server/services', 'server/services', {}, true);
-    this._copy('server/server.js', 'server/server.js', options);
-    this._copy('package.json', 'package.json', options);
-    this._copy('README.md', 'README.md', options);
+    this._copy('public', null, {}, true);
+    this._copy('test', null, {}, true);
+    this._copy('server/config/local.json', null, options);
+    this._copy('server/routers', null, {}, true);
+    this._copy('server/services', null, {}, true);
+    this._copy('server/server.js', null, options);
+    this._copy('package.json', null, options);
+    this._copy('README.md', null, options);
+    this._copy('.gitignore', null, options);
   }
 
   _sanitizeOption(options, name) {
     var optionValue = options[name];
-      if (!optionValue) {
-       this.log("Did not receive", name, "parameter from Scaffolder. Falling back to fallback_" + name + ".js");
+    if(!optionValue) {
+      this.log("Did not receive", name, "parameter from Scaffolder. Falling back to fallback_" + name + ".js");
 			this.options[name] = JSON.parse(require("./fallback_" + name));
-			return;
-		}
-
-		if (optionValue.indexOf("file:") === 0){
-			var fileName = optionValue.replace("file:","");
-			var filePath = this.destinationPath("./" + fileName);
-			console.log("Reading", name, "parameter from local file", filePath);
-			this.options[name] = this.fs.readJSON(filePath);
 			return;
 		}
 
@@ -96,96 +89,4 @@ module.exports = class extends Generator {
 			throw name + " parameter is expected to be a valid stringified JSON object";
 		}
 	}
-
-
-	prompting() {
-    if (this.skipPrompt) return;
-
-    return this.prompt([{
-      type: 'input',
-      name: 'appname',
-      message: 'Your project name',
-      default: this.appname // Default to current folder name
-    }, {
-      type: 'list',
-      name: 'applicationType',
-      choices: [{
-        name: 'basic',
-        value: 'basic'
-      }, {
-        name: 'BFF',
-        value: 'BFF'
-      }, {
-        name: 'WEB',
-        value: 'WEB'
-      }],
-      message: 'Which project type?',
-      default: 'basic'
-    }, {
-      type: 'number',
-      name: 'port',
-      message: 'Which port would you like to use?',
-      default: 8080 // Update test/common.js defaultPort if you change this
-    }, {
-      type: 'list',
-      name: 'autoScaling',
-      message: 'Would you to add AutoScaling? (y/n)',
-      choices: [{
-        name: 'yes',
-        value: true
-      }, {
-        name: 'no',
-        value: false
-      }]
-    }, {
-      type: 'list',
-      name: 'monitoring',
-      message: 'Would you to add monitoring? (y/n)',
-      choices: [{
-        name: 'yes',
-        value: true
-      }, {
-        name: 'no',
-        value: false
-      }]
-    }, {
-      type: 'list',
-      name: 'database',
-      message: 'Would you like a database? (y/n)',
-      default: false,
-      choices: [{
-        name: 'yes',
-        value: true
-      }, {
-        name: 'no',
-        value: false
-      }]
-    }, {
-      when: function(answers) {
-        return (/true/i).test(answers.database);
-      },
-      name: 'dbName',
-      message: 'Please select a database type',
-      type: 'list',
-      choices: ['mongoDB', 'redis', 'cloudant', 'objectStorage'],
-      filter: choices => choices.split(',')
-    }, {
-      type: 'list',
-      name: 'authentication',
-      message: 'Whould you like to add authentication? (y/n)',
-      choices: [{
-        name: 'yes',
-        value: true
-      },
-      {
-        name: 'no',
-        value: false
-      }]
-    }]).then(answers => {
-      this.options.spec = answers;
-      if (answers.dbName) {
-        answers.dbName.forEach(name => this.options.spec[name] = {})
-      }
-    });
-  }
 };
