@@ -70,7 +70,7 @@ module.exports = class extends Generator {
     this._copy('server/server.js', null, options);
     this._copy('package.json', null, options);
     this._copy('README.md', null, options);
-    this._copy('.gitignore', null, options);
+    this._copy('_gitignore', '.gitignore', options);
   }
 
 	_sanitizeOption(options, name) {
