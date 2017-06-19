@@ -73,19 +73,27 @@ module.exports = class extends Generator {
     this._copy('.gitignore', null, options);
   }
 
-  _sanitizeOption(options, name) {
-    var optionValue = options[name];
-    if(!optionValue) {
-      this.log("Did not receive", name, "parameter from Scaffolder. Falling back to fallback_" + name + ".js");
+	_sanitizeOption(options, name) {
+		var optionValue = options[name];
+		if (!optionValue) {
+			console.info("Did not receive", name, "parameter from Scaffolder. Falling back to fallback_" + name + ".js");
 			this.options[name] = JSON.parse(require("./fallback_" + name));
+			return
+		}
+
+		if (optionValue.indexOf("file:") === 0){
+			var fileName = optionValue.replace("file:","");
+			var filePath = this.destinationPath("./" + fileName);
+			console.info("Reading", name, "parameter from local file", filePath);
+			this.options[name] = this.fs.readJSON(filePath);
 			return;
 		}
 
 		try {
 			this.options[name] = typeof(this.options[name]) === "string" ?
 				JSON.parse(this.options[name]) : this.options[name];
-		} catch (err) {
-			console.error(chalk.red(err));
+		} catch (e) {
+			console.error(e);
 			throw name + " parameter is expected to be a valid stringified JSON object";
 		}
 	}

@@ -21,12 +21,10 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@types/mocha": "^2.2.41",
-    "@types/node": "^7.0.18",
-    "@types/yeoman-generator": "^1.0.2",
+    "mocha": "^3.2.0",
+    "yeoman-generator": "^1.0.2",
     "eslint": "^3.1.1",
     "eslint-plugin-ejs": "^0.0.2",
-    "mocha": "^3.2.0",
     "nyc": "^10.3.0",
     "yeoman-assert": "^2.2.1",
     "yeoman-test": "^1.5.1"
