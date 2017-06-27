@@ -1,6 +1,6 @@
 # generator-express
 
-[![Build Status](https://travis.ibm.com/arf/generator-express.svg?token=ePBWPJTgR2KYCeTsit1a&branch=master)](https://travis.ibm.com/arf/generator-express)
+[![Build Status](https://travis.ibm.com/arf/generator-core-node-express.svg?token=ePBWPJTgR2KYCeTsit1a&branch=master)](https://travis.ibm.com/arf/generator-core-node-express)
 
 ## Installation
 
@@ -9,13 +9,18 @@ First, install [Yeoman](http://yeoman.io) and generator-express using [npm](http
 ```bash
 npm install -g yo
 ```
+If you want to use the generator just install it using NPM
 
-Then clone this repository
 ```bash
-git clone https://github.ibm.com/arf/node-codegen-yeoman.git
+npm install -g @arf/generator-core-node-express
 ```
 
- npm link inside the repository directory:
+For development clone this repository
+```bash
+git clone https://github.ibm.com/arf/generator-core-node-express.git
+```
+
+`npm link` inside the repository directory:
 
  ```bash
  npm link
@@ -24,8 +29,5 @@ git clone https://github.ibm.com/arf/node-codegen-yeoman.git
 Change into a new directory and generate your project with:
 
 ```bash
-yo express
+yo @arf/core-node-express
 ```
-
-[npm-image]: https://badge.fury.io/js/generator-express.svg
-[npm-url]: https://npmjs.org/package/generator-express
