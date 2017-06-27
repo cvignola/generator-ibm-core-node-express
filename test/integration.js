@@ -93,7 +93,7 @@ describe('core-node-express:app integration test with custom spec', function () 
   before(function () {
     // Mock the options, set up an output folder and run the generator
     return helpers.run(path.join( __dirname, '../app'))
-      .withOptions({spec: { appname: 'testApp', port: common.defaultPort }})
+      .withOptions({spec: JSON.stringify({ appname: 'testApp', port: common.defaultPort })})
       .toPromise(); // Get a Promise back when the generator finishes
   });
 
@@ -173,7 +173,7 @@ describe('core-node-express:app integration test with custom bluemix', function 
   before(function () {
     // Mock the options, set up an output folder and run the generator
     return helpers.run(path.join( __dirname, '../app'))
-      .withOptions({bluemix: { name: 'testApp'}})
+      .withOptions({bluemix: JSON.stringify({ name: 'testApp'})})
       .toPromise(); // Get a Promise back when the generator finishes
   });
 
@@ -252,7 +252,7 @@ describe('core-node-express:app integration test with custom bluemix and spec', 
   before(function () {
     // Mock the options, set up an output folder and run the generator
     return helpers.run(path.join( __dirname, '../app'))
-      .withOptions({bluemix: { name: 'testApp'}, spec: {port: common.defaultPort}})
+      .withOptions({bluemix: JSON.stringify({ name: 'testApp'}), spec: JSON.stringify({port: common.defaultPort})})
       .toPromise(); // Get a Promise back when the generator finishes
   });
 
