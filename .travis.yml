@@ -2,11 +2,13 @@ language: node_js
 node_js:
   - "7"
 before_deploy:
+  - git config user.email "travis@travis-ci.org"
+  - git config user.name "Travis CI"
   - npm version patch -m "Increment version to %s"
 deploy:
   provider: npm
   email: ddcao@us.ibm.com
   api_key:
-    secure: h5FifjWOlV8bN6Hx5TeEl/G3zk78sDyHX+05vALTiA7KiW0XqGmKe94cn7wl91CeP7By2T+sv+5feSbp8pMLaSFrm6/QxUcw+f824LItJq2SwtVdHJFl9kxN2Oa+rs3OHPvwwcDpAtohiGAbD6IqDlfRaXMRGyB46GhAKr4l8ocEsoO5/iiTZUTcZ73elvUVB1v8AM1+1tHSCCs/90f6DN+H8vSmqaHLhKyVjIXwMAiZpO+58iDa7pkJaSKzgtGAATa4LtADN8WF99XeBgrj34YOnV2g4X+7Kq91zE4jxjjk12S2BCsGvb+TobcqV41NZ5OUy1972RWbp+cRyIV6tQmzGcs7GgGQmI8zl6S6Ree0Vgwix4t8ZOsxDM+uTXrlXaFEKvDy1IhMaiamk2ZAuNDHkZOXVKOC1zbyUmIIx5pXIhyyYOZx+zfoGuR+Tri5AX+p/I09iIm/ZXX2o0t7oxW+S/CD2TKjedhUDp01ZO35qF/D6gmYB6p6AFOrxj13Mu5VFOLMVCmp2eHPtzk78EaCml4F0jZmM2eVPnbDmk4uNFsDfGdYpelW9CmLtMWCleBByoHOA/S4GnV+SNdzCTtvk9tAMgApVvNHSHqQHW35WxjhBroYp+xmJesCI1o5Sn6GKmxuDN8vnWHI4oWSGJb1yc6qBq78ZU932ZeWweQ=
+    secure: $NPM_API_KEY
   on:
     branch: master
