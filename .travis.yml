@@ -1,13 +1,7 @@
 language: node_js
 node_js:
 - '7'
-script: npm test && ./build_publish_script.sh
+script: npm test && ./npm_publish_script.sh
 env:
   global:
   - secure: cxJrTV0zj2aMNrOxF551cvbZ0RgyGsDuIUR5F08/8rVBYY/ENJfu6j2XjJpbCDMaJpBGFHH5njxb6ka2FCcSVlKMiYUnyA/4jnLt9YOTk5MdAhiGc+GSbG0yx55IV8JOlDZVQ/QMRwnjGsHdfuRZ+cOpvtwnieN8OQs4p03a/UZBjhCMfK6R/31BtmVm+wqVMembUVRxMK/WCY5eu8fJGk+1UbZtDmAGMfnktsa0r0v1rb3wfnNUYTfYkyYVW6XzDvh0JHlIjSqYQw1He58M62qfZNRyYkuTGMReOi9KUedrcrYhfAVbIHIiWzpXCnyMGBpi5QOpHasNThL2cXzOYa8ga/vxB8qzJwRYStr0eeit4p63ZzMXm/ss+jHsk7R6Rp7rfsvVWHLbm4mn4MBeOkQ+5AVJ633oBJwXUxGVZ5/tpvq2y0drRtdQWUavuBma1p+JTY0dl57rWNO14in7wQs836xMTwqWfK5IWIaFrAkjYBVMXQuFMHFCwMdfGxSuIMmvE7eoi12emeAT+BPGUiLb7oULphJojOg42egKFx9BiIm4WDW3YmSLSMwmF5OXP1o5tJIh43tGaFvr2HbhylUXkTwIMEhjzS4xtWvyHcuRIPdm6O5exqQ07N8IN4JrSPzyVbiDVqmgf0oxstb2jl0JHrdLhKPvltW1087F9MM=
-notifications:
-  email:
-    recipients:
-    - ddcao@us.ibm.com
-    on_success: change # default: change
-    on_failure: always # default: always
