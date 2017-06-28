@@ -5,8 +5,8 @@ npm test
 
 if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ]; then
     echo "//npm-registry.whitewater.ibm.com/:_authToken=${NPM_AUTH_TOKEN}" >> ~/.npmrc
-    git config user.email "travis@travis-ci.org"
-    git config user.name "Travis CI"
+    git config user.email "travis@travis.ibm.com"
+    git config user.name "Travis IBM CI"
     git checkout -b increment-patch-version
     npm version patch -m "[ci skip] Increment package version to %s"
     npm publish
