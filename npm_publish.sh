@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 echo "//npm-registry.whitewater.ibm.com/:_authToken=${NPM_AUTH_TOKEN}" >> ~/.npmrc
 git config user.email "travis@travis-ci.org"
