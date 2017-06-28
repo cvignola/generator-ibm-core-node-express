@@ -1,9 +1,15 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/bash
+set -ev
 
-echo "//npm-registry.whitewater.ibm.com/:_authToken=${NPM_AUTH_TOKEN}" >> ~/.npmrc
-git config user.email "travis@travis-ci.org"
-git config user.name "Travis CI"
-npm version patch -m "Increment version to %s"
-npm publish
-git push --tags
+npm test
+
+if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_BRANCH}" = "development" ]; then
+    echo "//npm-registry.whitewater.ibm.com/:_authToken=${NPM_AUTH_TOKEN}" >> ~/.npmrc
+    git config user.email "travis@travis-ci.org"
+    git config user.name "Travis CI"
+    npm version patch -m "Increment version to %s"
+    npm publish
+    git push --tags
+else
+    echo "Not publishing to NPM. isPullRequest?: ${TRAVIS_PULL_REQUEST}, branch: ${TRAVIS_BRANCH}"
+fi

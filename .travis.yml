@@ -1,11 +1,7 @@
 language: node_js
 node_js:
 - '7'
-deploy:
-  provider: script
-  script: npm_publish.sh
-  on:
-    branch: development
+script: npm_publish.sh
 env:
   global:
     secure: rSCpYsvdgNEnF6M7aJJOql5UOd0CZJYDUIuqSu7F/M1uMtxdQyY/tYnclAWBo76J67BeQAHcoimvXHh3X4bT1ixyUmgrbXc+9T0602osO6Ll/an8+9PPmKVtwKdf+RgcAxXGvPRRQrkOR9WzYkJuxEg17dfUswLU9iJCsjSOKanNRpzhGNqk7pMeSMgm5wQ8DcBONuniiYxHInyJC7kDBbl8E7XZVlV/kjzV3NDUziXQTzMubxX3bK4RmhRYHNOLW60gyCIpvKZExOFFvsGuBNP6Z6zCdUOLZEK5HUII+zo8EBzdsiZHpC88b8kqOaF/CmToNT4xuaHgtFuzyDAc2KGC+Grp8xHMVlyFOfrP4JEKVlhMBMVVe/jtSUR/x+RvbrooSoztzaxKYZjn7cA7ilgQzd53hfg/ASoaj0SSddz0lQ9K0lBK/77lIzbOWjSnT73xMFKMYamoal5KTGdz5YxuANLywgLNraPzxVjIVWbhky+YKPV88+xK/D7BnewT5W9EOMijhKcTlc4V2qpWQqHCWqyoJHyuVje/K9t5MjcBSHnDJrsMzIac+e+JlxTzU6pS18k/2i41GrjHkN8Sd1VVgiCBU6TXWv5XrYDweM2s2JH6vnFx7qQKRQyLfMkRCLwuINAQCNypzMs27eW96dPMxrc3Sgjmkdv0to4vAgM=
