@@ -1,6 +1,8 @@
 # generator-express
 
-[![Build Status](https://travis.ibm.com/arf/generator-core-node-express.svg?token=ePBWPJTgR2KYCeTsit1a&branch=master)](https://travis.ibm.com/arf/generator-core-node-express)
+| master           | development  |
+|------------------|--------------|
+|[![Build Status](https://travis.ibm.com/arf/generator-core-node-express.svg?token=ePBWPJTgR2KYCeTsit1a&branch=master)](https://travis.ibm.com/arf/generator-core-node-express)|[![Build Status](https://travis.ibm.com/arf/generator-core-node-express.svg?token=ePBWPJTgR2KYCeTsit1a&branch=development)](https://travis.ibm.com/arf/generator-core-node-express)
 
 ## Installation
 

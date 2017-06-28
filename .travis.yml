@@ -1,17 +1,7 @@
 language: node_js
 node_js:
 - '7'
-before_deploy:
-- git config user.email "travis@travis-ci.org"
-- git config user.name "Travis CI"
-- npm version patch -m "Increment version to %s"
-deploy:
-  provider: npm
-  email: ddcao@us.ibm.com
-  skip_cleanup: true
-  api_key:
-    secure: WPh7ZpOYyHhqxEWPDCU7+y03q6WtRI2CTrVhpdEFHbPmXcCcZmEqouCt2oOc2A/xseidTLfEidXPr99Ybcd9GZZFYJMNMfCjlVhoboHD/j2ZnQMDs5fWKwV6SIFNsoRIdCUvuQiQeXDXOj/b1l/V0U3zLu2ZLbnnAC/9JYgBzLEApiYAVHdBpfaLN7JKNsc4AtnHo6Qa/JFWaYTS/dgJz+FOhUp8Exv11cCUFAWM+G0MlMHA/S1LdzY8NusBVdBD/VmzOU8P91+k6OuVdMHTbPRgvx7tfFgk2KDj8TAuCBfL79WPfPi1k39TZ4Dw9SIZjXwCU0CFZ2nwlC6PbKlukXODf/ML+KS8mKg+fVuegJ+xyoijc73U7Gn8IM9IkEutBquOEmiXAS6fjGL1hfy4ND0g9GSB1WicLbqN87Zjz204JiQ+Gr2sDQz7BrIpmFKPhwCHCHwNVmniJ1OR8k67wU6eEBd4y4e8rNexgNmu856KL8qXY/pCrm5z3W12SQxmv9LRX70iEFW1IdYlpqHHVlU3pIuB9iyJpq7ZgPWOa/qQeOYRGbf4Dz9YnsX+eu0xNHRZ5jZ7aWbllGqIp8zfC82wdUQa66EPPYD/IzSWVwGyhla49CsGDMf72Hsmc6upIqpYb0DBs2ehF1REf6t7uw5eo1NWzx9ASNn3xygkaZk=
-  on:
-    branch: master
-after_deploy:
-- git push
+script: "./npm_publish.sh"
+env:
+  global:
+  - secure: cxJrTV0zj2aMNrOxF551cvbZ0RgyGsDuIUR5F08/8rVBYY/ENJfu6j2XjJpbCDMaJpBGFHH5njxb6ka2FCcSVlKMiYUnyA/4jnLt9YOTk5MdAhiGc+GSbG0yx55IV8JOlDZVQ/QMRwnjGsHdfuRZ+cOpvtwnieN8OQs4p03a/UZBjhCMfK6R/31BtmVm+wqVMembUVRxMK/WCY5eu8fJGk+1UbZtDmAGMfnktsa0r0v1rb3wfnNUYTfYkyYVW6XzDvh0JHlIjSqYQw1He58M62qfZNRyYkuTGMReOi9KUedrcrYhfAVbIHIiWzpXCnyMGBpi5QOpHasNThL2cXzOYa8ga/vxB8qzJwRYStr0eeit4p63ZzMXm/ss+jHsk7R6Rp7rfsvVWHLbm4mn4MBeOkQ+5AVJ633oBJwXUxGVZ5/tpvq2y0drRtdQWUavuBma1p+JTY0dl57rWNO14in7wQs836xMTwqWfK5IWIaFrAkjYBVMXQuFMHFCwMdfGxSuIMmvE7eoi12emeAT+BPGUiLb7oULphJojOg42egKFx9BiIm4WDW3YmSLSMwmF5OXP1o5tJIh43tGaFvr2HbhylUXkTwIMEhjzS4xtWvyHcuRIPdm6O5exqQ07N8IN4JrSPzyVbiDVqmgf0oxstb2jl0JHrdLhKPvltW1087F9MM=
