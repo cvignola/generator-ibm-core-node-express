@@ -1,6 +1,5 @@
 'use strict';
 const Generator = require('yeoman-generator');
-const chalk = require('chalk');
 const thisPackage = require("./../package.json")
 const OPTION_BLUEMIX = "bluemix";
 const OPTION_SPEC = "spec";
@@ -73,28 +72,28 @@ module.exports = class extends Generator {
     this._copy('_gitignore', '.gitignore', options);
   }
 
-	_sanitizeOption(options, name) {
-		var optionValue = options[name];
-		if (!optionValue) {
-			console.info("Did not receive", name, "parameter from Scaffolder. Falling back to fallback_" + name + ".js");
-			this.options[name] = JSON.parse(require("./fallback_" + name));
-			return
-		}
+  _sanitizeOption(options, name) {
+    let optionValue = options[name];
+    if (!optionValue) {
+      console.info("Did not receive", name, "parameter from Scaffolder. Falling back to fallback_" + name + ".js");
+      this.options[name] = JSON.parse(require("./fallback_" + name));
+      return
+    }
 
-		if (optionValue.indexOf("file:") === 0){
-			var fileName = optionValue.replace("file:","");
-			var filePath = this.destinationPath("./" + fileName);
-			console.info("Reading", name, "parameter from local file", filePath);
-			this.options[name] = this.fs.readJSON(filePath);
-			return;
-		}
+    if (optionValue.indexOf("file:") === 0){
+      let fileName = optionValue.replace("file:","");
+      let filePath = this.destinationPath("./" + fileName);
+      console.info("Reading", name, "parameter from local file", filePath);
+      this.options[name] = this.fs.readJSON(filePath);
+      return;
+    }
 
-		try {
-			this.options[name] = typeof(this.options[name]) === "string" ?
-				JSON.parse(this.options[name]) : this.options[name];
-		} catch (e) {
-			console.error(e);
-			throw name + " parameter is expected to be a valid stringified JSON object";
-		}
-	}
+    try {
+      this.options[name] = typeof(this.options[name]) === "string" ?
+        JSON.parse(this.options[name]) : this.options[name];
+    } catch (e) {
+      console.error(e);
+      throw name + " parameter is expected to be a valid stringified JSON object";
+    }
+  }
 };
