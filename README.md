@@ -33,3 +33,9 @@ Change into a new directory and generate your project with:
 ```bash
 yo @arf/core-node-express
 ```
+
+To test
+
+```bash
+npm test
+```
