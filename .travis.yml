@@ -5,6 +5,4 @@ before_script:
   - git clone -b v2 git@github.ibm.com:bluemix-mobile-services/bmd-devops-pipeline.git
 script: npm run lint && npm test && ./bmd-devops-pipeline/scripts/npm_publish.sh
 notifications:
-  slack: 
-    rooms:
-      - ibm-cloudplatform:${SLACK_ARF_DEVOPS_TOKEN}#arf-devops-codegen
+  webhooks: https://hooks.slack.com/services/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
