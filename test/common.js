@@ -2,7 +2,6 @@
  * Contains helper code that is used by the tests.
  */
 'use strict';
-const fs = require('fs');
 
 // Paths to the generated files, if you move files around change paths here.
 exports.file = {
