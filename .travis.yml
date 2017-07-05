@@ -2,9 +2,14 @@ language: node_js
 node_js:
 - '8'
 before_script:
+  - echo $SLACK_ARF_DEVOPS
   - git clone -b v2 git@github.ibm.com:bluemix-mobile-services/bmd-devops-pipeline.git
 script: npm run lint && npm test && ./bmd-devops-pipeline/scripts/npm_publish.sh
+branches:
+  only:
+    - development
+    - master
 notifications:
   slack: 
     rooms:
-      - ibm-cloudplatform:${SLACK_ARF_DEVOPS_TOKEN}#arf-devops-codegen
+      - $SLACK_ARF_DEVOPS
