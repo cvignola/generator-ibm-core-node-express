@@ -1,4 +1,4 @@
-# generator-express
+# generator-core-node-express
 
 | master           | development  |
 |------------------|--------------|
