@@ -18,7 +18,7 @@ exports.file = {
 };
 
 // Default port defined in app/index.js.
-exports.defaultPort = 3456;
+exports.defaultPort = 3000;
 
 // The npm start command.
 exports.npmStart = "node server.js";
