@@ -14,5 +14,8 @@ require('./routers/index')(app);
 const port = process.env.PORT || localConfig.port;
 app.listen(port, function(){
 	logger.info(`<%= bluemix.name %> listening on http://localhost:${port}`);
+	<% if(this.spec && this.spec.applicationType === 'BFF'){ %>
+	logger.info(`OpenAPI (Swagger) spec is available at http://localhost:${port}/swagger/api`);
+	logger.info(`Swagger UI is available at http://localhost:${port}/swagger-ui`);
+	<% } %>
 });
-
