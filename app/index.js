@@ -48,7 +48,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(this.templatePath('_package-lock.json'), this.destinationPath('package-lock.json'), this.options);
     this.fs.copyTpl(this.templatePath('README.md'), this.destinationPath('README.md'), this.options);
 
-    if(this.options.spec && this.options.spec.applicationType === 'BFF') {
+    if(this.options.spec && this.options.spec.applicationType === 'MS') {
       this.fs.copy(this.templatePath('public/swagger-ui'), this.destinationPath('public/swagger-ui'));
       this.fs.copyTpl(this.templatePath('public/swagger.yaml'), this.destinationPath('public/swagger.yaml'), this.options);
     } else {
