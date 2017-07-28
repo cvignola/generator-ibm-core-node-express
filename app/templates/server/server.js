@@ -16,6 +16,6 @@ app.listen(port, function(){
 	logger.info(`<%= bluemix.name %> listening on http://localhost:${port}`);
 	<% if(typeof spec !== 'undefined' && spec.applicationType === 'MS'){ %>
 	logger.info(`OpenAPI (Swagger) spec is available at http://localhost:${port}/swagger/api`);
-	logger.info(`Swagger UI is available at http://localhost:${port}/swagger-ui`);
+	logger.info(`Swagger UI is available at http://localhost:${port}/explorer`);
 	<% } %>
 });

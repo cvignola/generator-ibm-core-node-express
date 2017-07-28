@@ -51,8 +51,10 @@ module.exports = class extends Generator {
     if(this.options.spec && this.options.spec.applicationType === 'MS') {
       this.fs.copy(this.templatePath('public/swagger-ui'), this.destinationPath('public/swagger-ui'));
       this.fs.copyTpl(this.templatePath('public/swagger.yaml'), this.destinationPath('public/swagger.yaml'), this.options);
+      this.fs.delete(this.destinationPath('server/routers/public.js'));
     } else {
       this.fs.copy(this.templatePath('public/index.html'), this.destinationPath('public/index.html'));
+      this.fs.delete(this.destinationPath('server/routers/swagger.js'));
     }
   }
 
