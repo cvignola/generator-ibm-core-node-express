@@ -38,8 +38,24 @@ module.exports = class extends Generator {
   }
 
   writing() {
-    this.fs.copyTpl(this.templatePath(), this.destinationPath(), this.options);
-    this.fs.move(this.destinationPath('_gitignore'), this.destinationPath('.gitignore'));
+    this.fs.copyTpl(this.templatePath('server'), this.destinationPath('server'), this.options);
+    this.fs.copyTpl(this.templatePath('test'), this.destinationPath('test'), this.options);
+    this.fs.copyTpl(this.templatePath('_gitignore'), this.destinationPath('.gitignore'), this.options);
+    this.fs.copyTpl(this.templatePath('cli-config.yml'), this.destinationPath('cli-config.yml'), this.options);
+    this.fs.copyTpl(this.templatePath('Dockerfile'), this.destinationPath('Dockerfile'), this.options);
+    this.fs.copyTpl(this.templatePath('Dockerfile-tools'), this.destinationPath('Dockerfile-tools'), this.options);
+    this.fs.copyTpl(this.templatePath('package.json'), this.destinationPath('package.json'), this.options);
+    this.fs.copyTpl(this.templatePath('_package-lock.json'), this.destinationPath('package-lock.json'), this.options);
+    this.fs.copyTpl(this.templatePath('README.md'), this.destinationPath('README.md'), this.options);
+
+    if(this.options.spec && this.options.spec.applicationType === 'MS') {
+      this.fs.copy(this.templatePath('public/swagger-ui'), this.destinationPath('public/swagger-ui'));
+      this.fs.copyTpl(this.templatePath('public/swagger.yaml'), this.destinationPath('public/swagger.yaml'), this.options);
+      this.fs.delete(this.destinationPath('server/routers/public.js'));
+    } else {
+      this.fs.copy(this.templatePath('public/index.html'), this.destinationPath('public/index.html'));
+      this.fs.delete(this.destinationPath('server/routers/swagger.js'));
+    }
   }
 
   _sanitizeOption(options, name) {

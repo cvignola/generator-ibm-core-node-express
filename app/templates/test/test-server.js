@@ -6,9 +6,10 @@ describe('Testing Server', function() {
 
   before(function(done){
     require(process.cwd() + '/server/server');
-    setTimeout(done, 1000); // Waiting 1 second for server to start
+    setTimeout(done, 5000); // Waiting 5 seconds for server to start
+    this.timeout(10000);
   });
-
+<% if(typeof spec === 'undefined' || spec.applicationType !== 'MS'){ %>
   it('Public endpoint returns "Hello!"', function(done){
     var responseString = '';
 
@@ -24,14 +25,14 @@ describe('Testing Server', function() {
       });
 
       response.on('end', function () {
-        expect(responseString).to.equal('Hello!');
+        expect(responseString).to.include('Hello world! This is a StarterKit!');
         done();
       });
-    }
+    };
 
     http.request(options, callback).end();
   });
-
+<% } %>
   it('Health endpoint shows status up', function(done){
     var responseString = '';
 
@@ -50,7 +51,7 @@ describe('Testing Server', function() {
         expect(responseString).to.equal('{"status":"UP"}');
         done();
       });
-    }
+    };
 
     http.request(options, callback).end();
   });
