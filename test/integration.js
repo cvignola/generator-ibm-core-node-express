@@ -89,6 +89,12 @@ describe('core-node-express:app integration test with custom spec', function () 
       assert.fileContent(common.file.gitignore, 'node_modules');
     });
   });
+
+  describe(common.file.cliconfig, function() {
+    it('should have buildpack', function() {
+      assert.fileContent(common.file.cliconfig, /\"buildpack\"/)
+    })
+  })
 });
 
 describe('core-node-express:app integration test with custom bluemix', function () {
@@ -168,6 +174,12 @@ describe('core-node-express:app integration test with custom bluemix', function 
       assert.fileContent(common.file.gitignore, 'node_modules');
     });
   });
+
+  describe(common.file.cliconfig, function() {
+    it('should have buildpack', function() {
+      assert.fileContent(common.file.cliconfig, /\"buildpack\"/)
+    })
+  })
 });
 
 describe('core-node-express:app integration test with custom bluemix and spec', function () {
@@ -247,4 +259,30 @@ describe('core-node-express:app integration test with custom bluemix and spec', 
       assert.fileContent(common.file.gitignore, 'node_modules');
     });
   });
+
+  describe(common.file.cliconfig, function() {
+    it('should have buildpack', function() {
+      assert.fileContent(common.file.cliconfig, /\"buildpack\"/)
+    })
+  })
+});
+
+describe('core-node-express:app integration test with isDeployableContainer spec', function() {
+   // Express build is slow so we need to set a longer timeout for the test
+  this.timeout(150000);
+
+  before(function () {
+    // Mock the options, set up an output folder and run the generator
+    return helpers.run(path.join( __dirname, '../app'))
+      .withOptions({
+        spec: JSON.stringify({ appname: 'testApp', port: common.defaultPort, isDeployableContainer: true }),
+        bluemix: JSON.stringify({name: PROJECT_NAME})
+      })
+      .toPromise(); // Get a Promise back when the generator finishes
+  });
+
+  it('should have deploy target in cli-config.xml', function() {
+    assert.fileContent(common.file.cliconfig, /\"container\"/);
+  });
+
 });

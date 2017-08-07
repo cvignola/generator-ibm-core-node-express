@@ -14,7 +14,8 @@ exports.file = {
   health: 'server/routers/health.js',
   index_router: 'server/routers/index.js',
   public: 'server/routers/public.js',
-  index_service: 'server/services/index.js'
+  index_service: 'server/services/index.js',
+  cliconfig: 'cli-config.yml'
 };
 
 // Default port defined in app/index.js.
