@@ -26,4 +26,4 @@ run-cmd : ""
 debug-cmd : "npm run debug"
 stop-cmd : "npm stop"
 
-deploy-target : <% if(typeof(spec) === 'object' && spec.isDeployableContainer){ %> "container" <%}else{%> "buildpack" <%}%>
+chart-path: "helm/<%= bluemix.name.toLowerCase()%>"

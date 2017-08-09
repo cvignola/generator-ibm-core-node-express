@@ -89,12 +89,6 @@ describe('core-node-express:app integration test with custom spec', function () 
       assert.fileContent(common.file.gitignore, 'node_modules');
     });
   });
-
-  describe(common.file.cliconfig, function() {
-    it('should have buildpack', function() {
-      assert.fileContent(common.file.cliconfig, /\"buildpack\"/)
-    })
-  })
 });
 
 describe('core-node-express:app integration test with custom bluemix', function () {
@@ -174,12 +168,6 @@ describe('core-node-express:app integration test with custom bluemix', function 
       assert.fileContent(common.file.gitignore, 'node_modules');
     });
   });
-
-  describe(common.file.cliconfig, function() {
-    it('should have buildpack', function() {
-      assert.fileContent(common.file.cliconfig, /\"buildpack\"/)
-    })
-  })
 });
 
 describe('core-node-express:app integration test with custom bluemix and spec', function () {
@@ -259,12 +247,6 @@ describe('core-node-express:app integration test with custom bluemix and spec', 
       assert.fileContent(common.file.gitignore, 'node_modules');
     });
   });
-
-  describe(common.file.cliconfig, function() {
-    it('should have buildpack', function() {
-      assert.fileContent(common.file.cliconfig, /\"buildpack\"/)
-    })
-  })
 });
 
 describe('core-node-express:app integration test with isDeployableContainer spec', function() {
@@ -281,8 +263,9 @@ describe('core-node-express:app integration test with isDeployableContainer spec
       .toPromise(); // Get a Promise back when the generator finishes
   });
 
-  it('should have deploy target in cli-config.xml', function() {
-    assert.fileContent(common.file.cliconfig, /\"container\"/);
+  it('should have chart path  in cli-config.xml', function() {
+    var reg = new RegExp('helm/' + PROJECT_NAME.toLowerCase());
+    assert.fileContent(common.file.cliconfig, reg);
   });
 
 });
