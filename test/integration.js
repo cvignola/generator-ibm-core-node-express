@@ -264,7 +264,7 @@ describe('core-node-express:app integration test with isDeployableContainer spec
   });
 
   it('should have chart path  in cli-config.xml', function() {
-    let reg = new RegExp('helm/' + PROJECT_NAME.toLowerCase());
+    let reg = new RegExp('chart/' + PROJECT_NAME.toLowerCase());
     assert.fileContent(common.file.cliconfig, reg);
   });
 

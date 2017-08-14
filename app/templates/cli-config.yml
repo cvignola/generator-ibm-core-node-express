@@ -26,4 +26,4 @@ run-cmd : ""
 debug-cmd : "npm run debug"
 stop-cmd : "npm stop"
 
-chart-path: "helm/<%= bluemix.name.toLowerCase()%>"
+chart-path: "chart/<%= bluemix.name.toLowerCase()%>"
