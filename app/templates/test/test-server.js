@@ -15,7 +15,7 @@ describe('Testing Server', function() {
 
     var options = {
       host: 'localhost',
-      port: process.env.PORT || 8080,
+      port: process.env.PORT || 3000,
       path: '/'
     };
 
@@ -25,7 +25,7 @@ describe('Testing Server', function() {
       });
 
       response.on('end', function () {
-        expect(responseString).to.include('You are currently running a NodeJS server.');
+        expect(responseString).to.include('Hello');
         done();
       });
     };
@@ -38,7 +38,7 @@ describe('Testing Server', function() {
 
     var options = {
       host: 'localhost',
-      port: process.env.PORT || 8080,
+      port: process.env.PORT || 3000,
       path: '/health'
     };
 

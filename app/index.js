@@ -64,7 +64,7 @@ module.exports = class extends Generator {
       return logger.error("Missing", name, "parameter");
     }
 
-    if (optionValue.indexOf("file:") === 0) {
+    if (typeof(optionValue) === "string" && optionValue.indexOf("file:") === 0) {
       let fileName = optionValue.replace("file:", "");
       let filePath = this.destinationPath("./" + fileName);
       logger.info("Reading", name, "parameter from local file", filePath);
