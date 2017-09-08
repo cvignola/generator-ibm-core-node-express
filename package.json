@@ -1,15 +1,14 @@
 {
-  "name": "@arf/generator-core-node-express",
+  "name": "generator-ibm-core-node-express",
   "version": "0.0.37",
-  "description": "Yeoman generator for core node-express application",
-  "homepage": "https://github.ibm.com/arf/generator-core-node-express",
-  "author": {},
+  "description": "Yeoman generator for IBM core node-express application",
+  "main": "generators/app/index.js",
+  "license": "Apache-2.0",
   "keywords": [
     "yeoman-generator"
   ],
   "files": [
-    "app",
-    "refresh"
+    "generators"
   ],
   "dependencies": {
     "chalk": "^1.1.3",
@@ -18,10 +17,13 @@
     "yosay": "^1.2.1"
   },
   "scripts": {
-    "test": "nyc mocha test/**/*.js",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "npm run lint && npm run mocha",
+		"mocha": "nyc mocha --recursive",
+		"coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
+    "coveralls": "^2.13.1",
     "mocha": "^3.2.0",
     "eslint": "^3.1.1",
     "eslint-plugin-ejs": "^0.0.2",
@@ -29,9 +31,5 @@
     "yeoman-assert": "^2.2.1",
     "yeoman-test": "^1.5.1"
   },
-  "repository": "https://github.ibm.com/arf/node-codegen-yeoman",
-  "license": "MIT",
-  "publishConfig": {
-    "registry": "https://npm-registry.whitewater.ibm.com/"
-  }
+  "repository": "https://github.com/ibm-developer/generator-ibm-core-node-express"
 }
